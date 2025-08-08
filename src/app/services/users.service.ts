@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class PruebaService {
+export class UsersService {
 
   constructor(private http: HttpClient) { }
 
@@ -13,7 +13,7 @@ private url = 'http://127.0.0.1:8000';
 
 
 
-  getData(): Observable<any> {
+  getUsers(): Observable<any> {
     console.log('Llamando a la API desde el servicio...');
     return this.http.get(this.url + '/api/users');
   };

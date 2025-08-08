@@ -1,8 +1,16 @@
 <div class="container-fluid p-0 m-0 d-flex justify-content-center">
-    <div class="mt-5 w-100 px-5 d-flex justify-content-center gap-5">
+    <div class="mt-5 w-100 px-5 d-flex justify-content-center gap-sm-5">
         <button class="home-button me-2">Siguiendo</button>
         <button class="home-button">Explorar</button>
         <button class="home-button">Mi cuenta</button>
-
     </div>
+
 </div>
+
+    <div>
+        Posts : 
+        @for (post of posts; track post) {
+            <p>Posts {{post.content}}</p>
+        }
+    </div>
+
