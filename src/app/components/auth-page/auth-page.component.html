@@ -1,0 +1,44 @@
+<!-- Componente Auth -->
+<div class="vh-100 d-flex flex-column justify-content-center align-items-center bg-dark" style="font-family: 'Poppins', sans-serif;">
+<h1 class="mb-5 fw-bold text-center" style="
+  font-size: 3.5rem; 
+  background: linear-gradient(90deg, #7b2ff7, #4a00e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  ">
+  INICIAR SESIÓN
+</h1>
+
+
+  <div class="row rounded-4 overflow-hidden" style="width: 1000px;">
+
+    <!-- Bloque logo -->
+    <div class="col-6 d-flex justify-content-center align-items-center p-3">
+      <img src="img/logo.png" alt="Logo" class="img-fluid" style="max-width: 300px;">
+    </div>
+
+    <!-- Bloque formulario y botones -->
+    <div class="col-6 d-flex flex-column justify-content-center align-items-center gap-3">
+
+      <form action="" class="w-75">
+        <div class="mb-3">
+          <label for="username" class="form-label text-white">Username</label>
+          <input type="text" id="username" name="username" class="form-control" placeholder="Introduce tu usuario" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label text-white">Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Introduce tu contraseña" required>
+        </div>
+
+        <button type="submit" class="auth-button btn btn-light w-100">Login</button>
+      </form>
+
+      <button type="button" class="auth-button btn btn-outline-light w-75">Register</button>
+
+    </div>
+
+  </div>
+</div>
