@@ -18,8 +18,9 @@
             <p>{{post.content}}</p>
 
                         <div class="d-flex align-items-center gap-2 mb-2">
-<img class="post-icons" src="img/like.webp" alt="">{{ getPostLikes(post.id.toString()) }}
-                            <img src="" alt="">
+                            <button (click)="this.postLike('2', post.id)" class="btn btn-light d-flex align-items-center gap-2">
+                            <img class="post-icons" src="img/like.webp" alt="">{{ getPostLikes(post.id.toString()) }}
+                            </button>
                         </div>
         </div>
 

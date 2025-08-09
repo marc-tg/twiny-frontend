@@ -15,9 +15,13 @@ export class LikeService {
     return this.http.get(this.url + '/api/likes');
   }
 
-getALike(id: string): Observable<any> {
-  return this.http.get(`${this.url}/api/likes/${id}`);
-}
+  getALike(idUser: string, idPost: string): Observable<any> {
+    return this.http.get(`${this.url}/api/likes/${idUser}/${idPost}`);
+  }
 
+  hasLike(idUser: any, idPost: any): Observable<any> {
+    // Implement this method if needed to check if a user has liked a post
+    return this.http.get(`${this.url}/api/likes/has/${idUser}/${idPost}`);
+  }
 
 }
