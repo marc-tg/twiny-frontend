@@ -1,30 +1,138 @@
-<div class="container-fluid p-0 m-0 d-flex flex-column align-items-center">
+<div class="container-fluid p-0 m-0 d-flex min-vh-100 text-white" style="background:#121212;">
 
-    <!-- Bloque de botones -->
-    <div class="mt-5 w-100 px-5 d-flex justify-content-center gap-sm-5">
-        <button class="home-button me-2">Siguiendo</button>
-        <button class="home-button">Explorar</button>
-        <button class="home-button">Mi cuenta</button>
-    </div>
+  <!-- Menú lateral izquierdo -->
+  <nav class="d-flex flex-column p-3" style="width: 240px; min-height: 100vh; border-right: 1px solid rgba(255,255,255,0.1);">
+    <h3 class="mb-4 fw-bold">MiRed</h3>
+    <button class="btn nav-btn mb-3 text-start w-100 px-3 py-2 active">Siguiendo</button>
+    <button class="btn nav-btn mb-3 text-start w-100 px-3 py-2">Explorar</button>
+    <button class="btn nav-btn mb-3 text-start w-100 px-3 py-2">Notificaciones</button>
+    <button class="btn nav-btn mb-3 text-start w-100 px-3 py-2">Mensajes</button>
+    <button class="btn nav-btn mb-3 text-start w-100 px-3 py-2">Guardados</button>
+    <button class="btn nav-btn mb-3 text-start w-100 px-3 py-2">Listas</button>
+    <button class="btn nav-btn mb-3 text-start w-100 px-3 py-2">Perfil</button>
+    <button class="btn nav-btn mb-3 text-start w-100 px-3 py-2">Más opciones</button>
+  </nav>
 
-    <!-- Bloque de posts -->
-    <div class="d-flex flex-column align-items-center justify-content-center my-4 p-4">
-        @for (post of posts; track post) {
-        <div class="posts  text-white p-3 mb-3 rounded-3 w-75" >
-            <div class="d-flex align-items-center gap-2 mb-2">
-            <img class="avatar-img" src="{{post.user.avatar}}" alt="">
-            <p>{{post.user.username}}</p>
-            </div>
-            <p>{{post.content}}</p>
+  <!-- Contenido principal -->
+  <main class="flex-grow-1 d-flex flex-column align-items-center p-4" style="max-width: 700px; width: 100%;">
 
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <button (click)="this.postLike('2', post.id)" class="btn btn-light d-flex align-items-center gap-2">
-                            <img class="post-icons" src="img/like.webp" alt="">{{ getPostLikes(post.id.toString()) }}
-                            </button>
-                        </div>
+    <!-- Lista de posts -->
+    <div class="d-flex flex-column align-items-center w-100">
+      @for (post of posts; track post) {
+      <div class="post-card p-4 mb-4 rounded-4 shadow-sm w-100" style="max-width: 600px;">
+
+        <!-- Usuario -->
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <img class="rounded-circle border border-2 border-light user-avatar" src="{{post.user.avatar}}" alt="" width="50" height="50">
+          <div>
+            <p class="fw-bold fs-5 mb-0">{{post.user.username}}</p>
+            <small class="text-secondary">{{post.date}}</small>
+          </div>
         </div>
 
-        }
+        <!-- Contenido -->
+        <p class="mb-3 fs-6" style="line-height: 1.6;">{{post.content}}</p>
+
+        <!-- Botones de interacción -->
+        <div class="d-flex align-items-center gap-4 interaction-bar">
+          <button (click)="this.postLike('2', post.id)" class="btn btn-like d-flex align-items-center gap-2">
+            <img src="img/like.webp" alt="" width="18">{{ getPostLikes(post.id.toString()) }}
+          </button>
+          <button class="btn btn-like d-flex align-items-center gap-2">
+            💬 {{post.comments || 0}}
+          </button>
+          <button class="btn btn-like d-flex align-items-center gap-2">
+            🔄 Compartir
+          </button>
+          <button class="btn btn-like d-flex align-items-center gap-2">
+            ⭐ Guardar
+          </button>
+        </div>
+
+      </div>
+      }
     </div>
 
+  </main>
+<!-- Espacio derecho vacío, opcional -->
+<aside class="d-none d-lg-block p-4" style="width: 620px; border-left: 1px solid rgba(255,255,255,0.1); max-height: 90vh;">
+  <h4 class="fw-bold mb-4 text-white">Últimas Noticias</h4>
+  @for (new of news; track new) {
+    <div class="news-card p-3 rounded-3 mb-3" style="background: rgba(255, 255, 255, 0.05);">
+      <h6 class="fw-semibold mb-2 text-white" style="line-height: 1.2; min-height: 3em; overflow: hidden; text-overflow: ellipsis;">{{new.title}}</h6>
+      <p class="text-secondary mb-3" style="line-height: 1.4; max-height: 4.2em; overflow: hidden; text-overflow: ellipsis;">{{new.description || 'Sin descripción disponible'}}</p>
+      <a href="{{new.url}}" target="_blank" class=" text-decoration-none fw-semibold">Leer más →</a>
+    </div>
+  }
+</aside>
+
+
+
+
 </div>
+
+<style>
+  body, html {
+    margin: 0; padding: 0;
+    background-color: #121212;
+  }
+
+  /* Menú lateral botones */
+  .nav-btn {
+    background: transparent;
+    color: white;
+    font-weight: 600;
+    border-radius: 9999px;
+    border: none;
+    transition: background 0.25s ease, transform 0.2s ease;
+  }
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+  }
+  .nav-btn.active {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  /* Card de post */
+  .post-card {
+    background: rgba(255, 255, 255, 0.02);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Botón like y demás */
+  .btn-like {
+    background: transparent;
+    border: none;
+    color: #bbb;
+    padding: 0;
+    font-size: 0.95rem;
+    transition: color 0.2s ease, transform 0.1s ease;
+    cursor: pointer;
+  }
+  .btn-like:hover {
+    color: #ff4b4b;
+    transform: scale(1.05);
+  }
+
+  /* Avatar hover */
+  .user-avatar {
+    transition: transform 0.25s ease;
+    cursor: pointer;
+  }
+  .user-avatar:hover {
+    transform: scale(1.1);
+  }
+
+  .news-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+  a.text-info:hover {
+    text-decoration: underline;
+  }
+</style>

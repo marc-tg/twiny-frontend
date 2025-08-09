@@ -5,14 +5,16 @@
 
     <!-- Panel Izquierdo: Logo y mensaje -->
     <div class="d-flex flex-column justify-content-center align-items-center text-center p-5 flex-fill"
-         style="background: linear-gradient(135deg, rgba(123,47,247,0.9), #563b95); color: white;">
-<img src="img/logo.png" alt="Logo" class="img-fluid mb-4 p-2 rounded" style="max-width: 180px; background: rgba(255,255,255,0.8); filter: drop-shadow(0 0 7px rgba(123,47,247,0.9));">
-      <h2 class="fw-bold text-uppercase" style="letter-spacing: 4px; font-size: 2.8rem; margin-bottom: 0.5rem;">Bienvenido</h2>
+      style="background: linear-gradient(135deg, rgba(123,47,247,0.9), #563b95); color: white;">
+      <img src="img/logo.png" alt="Logo" class="img-fluid mb-4 p-2 rounded"
+        style="max-width: 180px; background: rgba(255,255,255,0.8); filter: drop-shadow(0 0 7px rgba(123,47,247,0.9));">
+      <h2 class="fw-bold text-uppercase" style="letter-spacing: 4px; font-size: 2.8rem; margin-bottom: 0.5rem;">
+        Bienvenido</h2>
       <p class="opacity-75" style="font-size: 1.15rem; max-width: 280px;">
         Accede a tu cuenta para continuar y disfrutar de todas las funcionalidades.
       </p>
     </div>
-
+    
     <!-- Panel Derecho: Formulario -->
     <div class="bg-dark d-flex flex-column justify-content-center p-5 flex-fill">
 
@@ -27,12 +29,16 @@
       <form class="d-flex flex-column gap-4 text-white" action="">
         <div>
           <label for="username" class="form-label fw-semibold fs-5">Usuario</label>
-          <input type="text" id="username" name="username" class="form-control bg-secondary text-white border-0 rounded-3 px-3 py-2" placeholder="Introduce tu usuario" required style="font-size: 1rem;">
+          <input type="text" id="username" name="username"
+            class="form-control bg-secondary text-white border-0 rounded-3 px-3 py-2" placeholder="Introduce tu usuario"
+            required style="font-size: 1rem;">
         </div>
 
         <div>
           <label for="password" class="form-label fw-semibold fs-5">Contraseña</label>
-          <input type="password" id="password" name="password" class="form-control bg-secondary text-white border-0 rounded-3 px-3 py-2" placeholder="Introduce tu contraseña" required style="font-size: 1rem;">
+          <input type="password" id="password" name="password"
+            class="form-control bg-secondary text-white border-0 rounded-3 px-3 py-2"
+            placeholder="Introduce tu contraseña" required style="font-size: 1rem;">
         </div>
 
         <button type="submit" class="btn btn-gradient fw-bold py-2 mt-3 w-100" style="
@@ -51,10 +57,8 @@
         color: #7b2ff7;
         font-size: 1.05rem;
         transition: background-color 0.3s ease, color 0.3s ease;
-      "
-      onmouseover="this.style.backgroundColor='#7b2ff7'; this.style.color='white';"
-      onmouseout="this.style.backgroundColor='transparent'; this.style.color='#7b2ff7';"
-      >Crear cuenta</button>
+      " onmouseover="this.style.backgroundColor='#7b2ff7'; this.style.color='white';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#7b2ff7';">Crear cuenta</button>
 
     </div>
 

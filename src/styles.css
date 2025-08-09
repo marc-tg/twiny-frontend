@@ -46,3 +46,11 @@ body {
 .post-icons {
   width: 20px;
 }
+
+.post-buttons {
+    background-color: transparent ;
+    border: none;
+    color: white;
+    padding: 0;
+    gap: 0;
+}

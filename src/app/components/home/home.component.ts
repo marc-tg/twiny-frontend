@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PostsService } from '../../services/posts.service';
 import { LikeService } from '../../services/like.service';
+import { NewsService } from '../../services/news.service';
 
 @Component({
   selector: 'app-home',
@@ -14,10 +15,12 @@ export class HomeComponent {
   likes: any[] = [];
   posts: any[] = [];
   likesPosts: number = 0;
+  news: any[] = []; // Array para almacenar las noticias
 
-  constructor(private postsService: PostsService, private likeService: LikeService) {
+  constructor(private postsService: PostsService, private likeService: LikeService, private newsService: NewsService) {
     this.getPosts();
     this.getLikes();
+    this.getNews();
 
   }
   likesCountMap: { [postId: string]: number } = {};
@@ -96,7 +99,17 @@ export class HomeComponent {
     );
   }
 
-
+  getNews() {
+    this.newsService.getNews().subscribe(
+      (response) => {
+        console.log('News received:', response);
+        this.news = response.articles; // Asumiendo que la respuesta tiene un campo 'articles'
+      },
+      (error) => {
+        console.error('Error fetching news:', error);
+      }
+    );
+  }
 
 
 }
