@@ -38,7 +38,9 @@ body {
 .bg-purple {
   background-color: purple;
 }
-
+.text-purple {
+  color: purple;
+}
 .avatar-img {
   width: 20px;
 }

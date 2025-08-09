@@ -14,7 +14,7 @@
   </nav>
 
   <!-- Contenido principal -->
-  <main class="flex-grow-1 d-flex flex-column align-items-center p-4" style="max-width: 700px; width: 100%;">
+  <main class="flex-grow-1 d-flex flex-column align-items-center p-4 mt-4" style="max-width: 700px; width: 100%;">
 
     <!-- Lista de posts -->
     <div class="d-flex flex-column align-items-center w-100">
@@ -42,9 +42,6 @@
             💬 {{post.comments || 0}}
           </button>
           <button class="btn btn-like d-flex align-items-center gap-2">
-            🔄 Compartir
-          </button>
-          <button class="btn btn-like d-flex align-items-center gap-2">
             ⭐ Guardar
           </button>
         </div>
@@ -55,13 +52,13 @@
 
   </main>
 <!-- Espacio derecho vacío, opcional -->
-<aside class="d-none d-lg-block p-4" style="width: 620px; border-left: 1px solid rgba(255,255,255,0.1); max-height: 90vh;">
+<aside class="d-none d-lg-block p-4 mt-4" style="width: 620px; border-left: 1px solid rgba(255,255,255,0.1); max-height: 90vh;">
   <h4 class="fw-bold mb-4 text-white">Últimas Noticias</h4>
   @for (new of twentylastNews; track new) {
     <div class="news-card p-3 rounded-3 mb-3" style="background: rgba(255, 255, 255, 0.05);">
       <h6 class="fw-semibold mb-2 text-white" style="line-height: 1.2; min-height: 3em; overflow: hidden; text-overflow: ellipsis;">{{new.title}}</h6>
       <p class="text-secondary mb-3" style="line-height: 1.4; max-height: 4.2em; overflow: hidden; text-overflow: ellipsis;">{{new.description || 'Sin descripción disponible'}}</p>
-      <a href="{{new.url}}" target="_blank" class=" text-decoration-none fw-semibold">Leer más →</a>
+      <a href="{{new.url}}" target="_blank" class="text-purple text-decoration-none fw-semibold">Leer más →</a>
     </div>
   }
 </aside>

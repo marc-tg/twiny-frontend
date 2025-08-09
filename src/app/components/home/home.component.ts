@@ -105,7 +105,7 @@ export class HomeComponent {
       (response) => {
         console.log('News received:', response);
         this.news = response.articles; // Asumiendo que la respuesta tiene un campo 'articles'
-        this.twentylastNews = this.news.slice(0, 20); // Tomar las últimas 20 noticias
+        this.twentylastNews = this.news.slice(0, 10); // Tomar las últimas 20 noticias
       },
       (error) => {
         console.error('Error fetching news:', error);
