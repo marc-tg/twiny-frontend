@@ -19,24 +19,40 @@ export class HomeComponent {
     this.getPosts();
     this.getLikes();
 
-
   }
   likesCountMap: { [postId: string]: number } = {};
 
-  postLike($idUser: any, $idPost: any) {
-    let likeToChange: any = '';
-    this.likeService.hasLike($idUser, $idPost).subscribe(
-      (response) => {
+  postLike(idUser: any, idPost: any) {
+    this.likeService.hasLike(idUser, idPost).subscribe(
+      (response: any) => {
         console.log('Like received:', response);
-        likeToChange = response;
+
+        if (response.hasLike) {
+          // Si ya tiene like, borrar like
+          this.likeService.deleteLike(idUser, idPost).subscribe(
+            (resp) => {
+              console.log('Like deleted:', resp);
+              this.getLikes();
+            },
+            (err) => console.error('Error deleting like:', err)
+          );
+        } else {
+          // Si no tiene like, dar like
+          this.likeService.giveLike(idUser, idPost).subscribe(
+            (resp) => {
+              console.log('Like given:', resp);
+              this.getLikes();
+            },
+            (err) => console.error('Error giving like:', err)
+          );
+        }
       },
       (error) => {
         console.error('Error fetching like:', error);
       }
     );
-
-    console.log('Like to change:', likeToChange);
   }
+
 
   getLikes() {
     this.likeService.getLikes().subscribe(

@@ -24,4 +24,12 @@ export class LikeService {
     return this.http.get(`${this.url}/api/likes/has/${idUser}/${idPost}`);
   }
 
+  deleteLike(idUser: string, idPost: string): Observable<any> {
+    return this.http.delete(`${this.url}/api/likes/${idUser}/${idPost}`);
+  }
+
+  giveLike(idUser: string, idPost: string): Observable<any> {
+    return this.http.post(`${this.url}/api/likes/${idUser}/${idPost}`, {});
+  }
+
 }
