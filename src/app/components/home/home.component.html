@@ -1,16 +1,29 @@
-<div class="container-fluid p-0 m-0 d-flex justify-content-center">
+<div class="container-fluid p-0 m-0 d-flex flex-column align-items-center">
+
+    <!-- Bloque de botones -->
     <div class="mt-5 w-100 px-5 d-flex justify-content-center gap-sm-5">
         <button class="home-button me-2">Siguiendo</button>
         <button class="home-button">Explorar</button>
         <button class="home-button">Mi cuenta</button>
     </div>
 
-</div>
-
-    <div>
-        Posts : 
+    <!-- Bloque de posts -->
+    <div class="d-flex flex-column align-items-center justify-content-center my-4 p-4">
         @for (post of posts; track post) {
-            <p>Posts {{post.content}}</p>
+        <div class="posts  text-white p-3 mb-3 rounded-3 w-75" >
+            <div class="d-flex align-items-center gap-2 mb-2">
+            <img class="avatar-img" src="{{post.user.avatar}}" alt="">
+            <p>{{post.user.username}}</p>
+            </div>
+            <p>{{post.content}}</p>
+
+                        <div class="d-flex align-items-center gap-2 mb-2">
+<img class="post-icons" src="img/like.webp" alt="">{{ getPostLikes(post.id.toString()) }}
+                            <img src="" alt="">
+                        </div>
+        </div>
+
         }
     </div>
 
+</div>

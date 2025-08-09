@@ -17,7 +17,6 @@ app-root {
 body {
     background-color: rgb(23, 23, 23);
   font-family: 'Poppins', sans-serif;
-font-weight: bolder;
 }
 
 .auth-button {
@@ -28,4 +27,21 @@ font-weight: bolder;
  border: none;
  background-color: transparent;
  color: white;
+}
+
+.posts {
+  border: 1px solid white;
+  
+}
+
+.bg-purple {
+  background-color: purple;
+}
+
+.avatar-img {
+  width: 20px;
+}
+
+.post-icons {
+  width: 20px;
 }
