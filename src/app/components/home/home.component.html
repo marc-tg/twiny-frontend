@@ -57,7 +57,7 @@
 <!-- Espacio derecho vacío, opcional -->
 <aside class="d-none d-lg-block p-4" style="width: 620px; border-left: 1px solid rgba(255,255,255,0.1); max-height: 90vh;">
   <h4 class="fw-bold mb-4 text-white">Últimas Noticias</h4>
-  @for (new of news; track new) {
+  @for (new of twentylastNews; track new) {
     <div class="news-card p-3 rounded-3 mb-3" style="background: rgba(255, 255, 255, 0.05);">
       <h6 class="fw-semibold mb-2 text-white" style="line-height: 1.2; min-height: 3em; overflow: hidden; text-overflow: ellipsis;">{{new.title}}</h6>
       <p class="text-secondary mb-3" style="line-height: 1.4; max-height: 4.2em; overflow: hidden; text-overflow: ellipsis;">{{new.description || 'Sin descripción disponible'}}</p>

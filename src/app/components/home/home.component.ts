@@ -17,6 +17,7 @@ export class HomeComponent {
   likesPosts: number = 0;
   news: any[] = []; // Array para almacenar las noticias
 
+  twentylastNews: any[] = []; // Array para almacenar las últimas noticias
   constructor(private postsService: PostsService, private likeService: LikeService, private newsService: NewsService) {
     this.getPosts();
     this.getLikes();
@@ -104,12 +105,14 @@ export class HomeComponent {
       (response) => {
         console.log('News received:', response);
         this.news = response.articles; // Asumiendo que la respuesta tiene un campo 'articles'
+        this.twentylastNews = this.news.slice(0, 20); // Tomar las últimas 20 noticias
       },
       (error) => {
         console.error('Error fetching news:', error);
       }
     );
   }
+
 
 
 }
