@@ -17,23 +17,22 @@ export class AuthPageComponent {
 
   constructor(private authService: AuthService, private router: Router) {
     this.loginForm = new FormGroup({
-      username: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required]),
       password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
+        Validators.required      ]),
     });
   }
 login() {
+      console.log('Intentando iniciar sesión ');
+
   if (this.loginForm.valid) {
     const username = this.loginForm.get('username')?.value;
     const password = this.loginForm.get('password')?.value;
-
     this.authService.login(username, password).subscribe({
       next: (res) => {
         // Guardas el token
         localStorage.setItem('token', res.access_token);
-        
+
         // Opcional: rediriges a la página protegida o dashboard
         this.router.navigate(['/home']);
       },
