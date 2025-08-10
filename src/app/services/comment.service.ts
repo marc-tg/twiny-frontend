@@ -13,6 +13,9 @@ export class CommentService {
 
     getPostComments(idPost:any): Observable<any> {
     return this.http.get(`${this.url}/api/comments/post/${idPost}`);
-  }
+  } 
+    getComments(): Observable<any> {
+    return this.http.get(`${this.url}/api/comments`);
+    }
 
 }

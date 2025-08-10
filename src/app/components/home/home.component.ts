@@ -9,22 +9,26 @@ import { CommentService } from '../../services/comment.service';
   imports: [],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  standalone: true
+  standalone: true,
 })
 export class HomeComponent {
-
   likes: any[] = [];
   posts: any[] = [];
   likesPosts: number = 0;
   news: any[] = []; // Array para almacenar las noticias
-  comments: any[] = []; 
+  comments: any[] = [];
+  commentsByPostId: { [postId: string]: any[] } = {}; // mapa postId -> comentarios
 
   twentylastNews: any[] = []; // Array para almacenar las últimas noticias
-  constructor(private commentsService:CommentService ,private postsService: PostsService, private likeService: LikeService, private newsService: NewsService) {
+  constructor(
+    private commentsService: CommentService,
+    private postsService: PostsService,
+    private likeService: LikeService,
+    private newsService: NewsService
+  ) {
     this.getPosts();
     this.getLikes();
     this.getNews();
-
   }
   likesCountMap: { [postId: string]: number } = {};
 
@@ -59,7 +63,6 @@ export class HomeComponent {
     );
   }
 
-
   getLikes() {
     this.likeService.getLikes().subscribe(
       (response: any[]) => {
@@ -90,17 +93,29 @@ export class HomeComponent {
     return this.likesCountMap[postId] || 0;
   }
 
-  getPosts() {
-    this.postsService.getPosts().subscribe(
-      (response) => {
-        console.log('Posts received:', response);
-        this.posts = response;
-      },
-      (error) => {
-        console.error('Error fetching posts:', error);
-      }
-    );
-  }
+getPosts() {
+  this.postsService.getPosts().subscribe(
+    (response) => {
+      this.posts = response;
+
+      // Cargar comentarios para cada post para tener el conteo
+      this.posts.forEach(post => {
+        this.commentsService.getPostComments(post.id).subscribe(
+          (comments) => {
+            this.commentsByPostId[post.id] = comments;
+          },
+          (error) => {
+            console.error('Error fetching comments for post', post.id, error);
+          }
+        );
+      });
+    },
+    (error) => {
+      console.error('Error fetching posts:', error);
+    }
+  );
+}
+
 
   getNews() {
     this.newsService.getNews().subscribe(
@@ -115,23 +130,23 @@ export class HomeComponent {
     );
   }
 
-  toggleComments($idPost: any) {
-    this.commentsService.getPostComments($idPost).subscribe(
-      (response: any) => {
-        console.log('Comments received:', response);
-        this.comments = response;
-        const commentsDiv = document.getElementById($idPost);
-        if (commentsDiv) {
-          commentsDiv.classList.toggle('d-none');
-        }
-      },
-      (error) => {
-        console.error('Error fetching comments:', error);
+toggleComments(postId: any) {
+  this.commentsService.getPostComments(postId).subscribe(
+    (response: any[]) => {
+      this.commentsByPostId[postId] = response;
+      const commentsDiv = document.getElementById(postId);
+      if (commentsDiv) {
+        commentsDiv.classList.toggle('d-none');
       }
-    );
+    },
+    (error) => {
+      console.error('Error fetching comments:', error);
     }
-    
+  );
+}
 
-  }
+getCommentsCount(postId: any): number {
+  return this.commentsByPostId[postId]?.length || 0;
+}
 
-
+}

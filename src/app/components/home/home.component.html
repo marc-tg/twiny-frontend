@@ -39,7 +39,7 @@
             <img src="img/like.webp" alt="" width="18">{{ getPostLikes(post.id.toString()) }}
           </button>
           <button (click)="this.toggleComments(post.id)" class="btn btn-like d-flex align-items-center gap-2">
-            💬 {{post.comments || 0}}
+            💬 {{ this.getCommentsCount(post.id)|| 0}}
           </button>
           <button class="btn btn-like d-flex align-items-center gap-2">
             ⭐ Guardar
@@ -64,7 +64,7 @@
 
   <!-- Lista de comentarios -->
 <div class="comments-list d-flex flex-column gap-3">
-  @for (comment of comments; track comment) {
+  @for (comment of commentsByPostId[post.id]; track comment) {
     <div class="comment-item p-3 border rounded shadow-sm d-flex gap-3 align-items-start">
       
       <!-- Foto del usuario -->
