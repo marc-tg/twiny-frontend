@@ -32,7 +32,7 @@ login() {
       next: (res) => {
         // Guardas el token
         localStorage.setItem('token', res.access_token);
-
+localStorage.setItem('user', JSON.stringify(res.user));
         // Opcional: rediriges a la página protegida o dashboard
         this.router.navigate(['/home']);
       },

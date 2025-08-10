@@ -1,0 +1,87 @@
+<div class="profile container-fluid text-light p-0">
+
+  <!-- Portada -->
+  <div class="cover-photo bg-purple" style="height: 250px;"></div>
+
+  <!-- Cabecera: avatar + botón (responsive) -->
+  <div
+    class="profile-header d-flex flex-column flex-md-row justify-content-between align-items-center px-5"
+    style="margin-top: -90px;"
+  >
+    <img
+      src="{{ user.avatar || 'https://i.pravatar.cc/250?img=12' }}"
+      alt="Avatar"
+      class="rounded-circle border border-light mb-3 mb-md-0"
+      style="width: 180px; height: 180px; object-fit: cover;"
+    />
+    <button class="btn btn-outline-light btn-lg rounded-pill ms-md-3">
+      Editar perfil
+    </button>
+  </div>
+
+  <!-- Información principal -->
+  <section class="profile-info px-5 mt-4 text-start">
+    <h1 class="display-4 fw-bold">{{ user.name }}</h1>
+    <div class="fs-4 text-secondary">&#64;{{ user.username }}</div>
+    <p class="mt-3 text-light-emphasis" *ngIf="user.bio && user.bio.trim()">
+      {{ user.bio }}
+    </p>
+  </section>
+
+  <!-- Información adicional -->
+  <section
+    class="profile-extra-info d-flex flex-wrap gap-4 px-4 mt-4 text-secondary fs-5"
+  >
+    <div *ngIf="user.location">📍 {{ user.location }}</div>
+    <div *ngIf="user.website">
+      🔗
+      <a
+        href="{{ user.website }}"
+        target="_blank"
+        rel="noopener"
+        class="text-light text-decoration-none"
+        >{{ user.website }}</a
+      >
+    </div>
+    <div *ngIf="user.created_at">🗓️ Se unió en {{ user.created_at }}</div>
+  </section>
+
+  <!-- Estadísticas (responsive: columnas en móvil, fila en desktop) -->
+  <section
+    class="profile-stats d-flex flex-column flex-md-row justify-content-center gap-4 gap-md-5 px-4 mt-5 border-top border-secondary pt-4 mx-5"
+  >
+    <div class="text-center flex-fill">
+      <div class="fs-1 fw-bold text-light">{{ user.tweets || 0 }}</div>
+      <div class="text-secondary fs-5">Posts</div>
+    </div>
+    <div class="text-center flex-fill">
+      <div class="fs-1 fw-bold text-light">{{ user.likes || 0 }}</div>
+      <div class="text-secondary fs-5">Likes</div>
+    </div>
+    <div class="text-center flex-fill">
+      <div class="fs-1 fw-bold text-light">{{ user.followers || 0 }}</div>
+      <div class="text-secondary fs-5">Seguidores</div>
+    </div>
+  </section>
+  
+  <!-- Botones para seleccionar sección -->
+<section
+  class="px-4 mx-5 mt-5 d-flex gap-3 border-top border-secondary pt-4"
+>
+  <button
+    class=" flex-fill"
+    [class.btn-primary]="selectedSection === 'posts'"
+    [class.btn-outline-light]="selectedSection !== 'posts'"
+    (click)="selectedSection = 'posts'"
+  >
+    Posts
+  </button>
+  <button
+    class=" flex-fill"
+    [class.btn-primary]="selectedSection === 'likes'"
+    [class.btn-outline-light]="selectedSection !== 'likes'"
+    (click)="selectedSection = 'likes'"
+  >
+    Posts que ha dado like
+  </button>
+</section>
