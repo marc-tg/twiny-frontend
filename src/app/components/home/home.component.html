@@ -38,13 +38,55 @@
           <button (click)="this.postLike('2', post.id)" class="btn btn-like d-flex align-items-center gap-2">
             <img src="img/like.webp" alt="" width="18">{{ getPostLikes(post.id.toString()) }}
           </button>
-          <button class="btn btn-like d-flex align-items-center gap-2">
+          <button (click)="this.toggleComments(post.id)" class="btn btn-like d-flex align-items-center gap-2">
             💬 {{post.comments || 0}}
           </button>
           <button class="btn btn-like d-flex align-items-center gap-2">
             ⭐ Guardar
           </button>
         </div>
+        <!-- Comentarios -->
+       <div id="{{ post.id }}" class="d-flex d-none flex-column">
+
+  <!-- Formulario para nuevo comentario -->
+  <div class="writeComment d-flex flex-column gap-2 mb-3">
+    <form action="">
+      <label for="userNewComment" class="fw-bold">Escribe tu comentario</label>
+      <input 
+        type="text" 
+        name="userNewComment" 
+        id="userNewComment" 
+        placeholder="Escribe aquí..." 
+        class="form-control"
+      >
+    </form>
+  </div>
+
+  <!-- Lista de comentarios -->
+<div class="comments-list d-flex flex-column gap-3">
+  @for (comment of comments; track comment) {
+    <div class="comment-item p-3 border rounded shadow-sm d-flex gap-3 align-items-start">
+      
+      <!-- Foto del usuario -->
+      <img 
+        [src]="comment.user.avatar || '/img/default-avatar.jpg'" 
+        alt="{{ comment.user.username }}" 
+        class="rounded-circle border"
+        style="width: 48px; height: 48px; object-fit: cover;"
+      >
+
+      <!-- Texto del comentario -->
+      <div class="comment-content flex-grow-1">
+        <p class="mb-1 fw-bold">{{ comment.user.username }}</p>
+        <p class="mb-0 ">{{ comment.content }}</p>
+      </div>
+
+    </div>
+  }
+</div>
+
+
+</div>
 
       </div>
       }

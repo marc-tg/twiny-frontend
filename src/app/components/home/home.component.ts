@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PostsService } from '../../services/posts.service';
 import { LikeService } from '../../services/like.service';
 import { NewsService } from '../../services/news.service';
+import { CommentService } from '../../services/comment.service';
 
 @Component({
   selector: 'app-home',
@@ -16,9 +17,10 @@ export class HomeComponent {
   posts: any[] = [];
   likesPosts: number = 0;
   news: any[] = []; // Array para almacenar las noticias
+  comments: any[] = []; 
 
   twentylastNews: any[] = []; // Array para almacenar las últimas noticias
-  constructor(private postsService: PostsService, private likeService: LikeService, private newsService: NewsService) {
+  constructor(private commentsService:CommentService ,private postsService: PostsService, private likeService: LikeService, private newsService: NewsService) {
     this.getPosts();
     this.getLikes();
     this.getNews();
@@ -113,6 +115,23 @@ export class HomeComponent {
     );
   }
 
+  toggleComments($idPost: any) {
+    this.commentsService.getPostComments($idPost).subscribe(
+      (response: any) => {
+        console.log('Comments received:', response);
+        this.comments = response;
+        const commentsDiv = document.getElementById($idPost);
+        if (commentsDiv) {
+          commentsDiv.classList.toggle('d-none');
+        }
+      },
+      (error) => {
+        console.error('Error fetching comments:', error);
+      }
+    );
+    }
+    
+
+  }
 
 
-}
